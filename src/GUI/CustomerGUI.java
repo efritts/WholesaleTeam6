@@ -22,7 +22,12 @@ import java.awt.event.ActionListener;
 import java.util.List;
 import java.awt.event.ActionEvent;
 import java.awt.Color;
+import java.awt.Component;
+
 import javax.swing.border.LineBorder;
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.TableCellRenderer;
+
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
@@ -60,14 +65,14 @@ public class CustomerGUI extends JFrame {
 					frame.pack();
 					frame.setVisible(true);
 					frame.addWindowListener(new WindowAdapter() {
-						  private CustomerDAO customerDAO;
+						private CustomerDAO customerDAO;
 
 						public void windowClosing() throws SQLException {
-						    //do something
-							 customerDAO = new CustomerDAO();
-							 customerDAO.closeConn();
-						  }
-						});
+							// do something
+							customerDAO = new CustomerDAO();
+							customerDAO.closeConn();
+						}
+					});
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -136,7 +141,25 @@ public class CustomerGUI extends JFrame {
 		JScrollPane scrollPane = new JScrollPane();
 		contentPane.add(scrollPane, BorderLayout.CENTER);
 
-		table = new JTable();
+		table = new JTable() {
+			@Override
+			public Component prepareRenderer(TableCellRenderer renderer, int row, int col) {
+				Component comp = super.prepareRenderer(renderer, row, col);
+				((JLabel) comp).setHorizontalAlignment(JLabel.LEFT);
+				return comp;
+			}
+
+		};
+		table.setBackground(Color.WHITE);
+
+		table.setShowGrid(true);
+		// Removing the grid line from the table
+		// table.setShowGrid(false);
+		// Show vertical grid lines
+		table.setShowVerticalLines(true);
+		table.setGridColor(Color.black);
+
+
 		table.setColumnSelectionAllowed(true);
 		table.addMouseListener(new MouseAdapter() {
 			@Override
@@ -354,8 +377,6 @@ public class CustomerGUI extends JFrame {
 			}
 		});
 		panel_2.add(btnDelete);
-		
-	
 
 	}
 }

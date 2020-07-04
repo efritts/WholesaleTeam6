@@ -23,7 +23,11 @@ import java.awt.event.ActionListener;
 import java.util.List;
 import java.awt.event.ActionEvent;
 import java.awt.Color;
+import java.awt.Component;
+
 import javax.swing.border.LineBorder;
+import javax.swing.table.TableCellRenderer;
+
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
@@ -126,7 +130,24 @@ public class SupplierGUI extends JFrame {
 		JScrollPane scrollPane = new JScrollPane();
 		contentPane.add(scrollPane, BorderLayout.CENTER);
 		
-		table = new JTable();
+		table = new JTable() {
+			@Override
+			public Component prepareRenderer(TableCellRenderer renderer, int row, int col) {
+				Component comp = super.prepareRenderer(renderer, row, col);
+				((JLabel) comp).setHorizontalAlignment(JLabel.LEFT);
+				return comp;
+			}
+
+		};
+		table.setBackground(Color.WHITE);
+
+		table.setShowGrid(true);
+		// Removing the grid line from the table
+		// table.setShowGrid(false);
+		// Show vertical grid lines
+		table.setShowVerticalLines(true);
+		table.setGridColor(Color.black);
+
 		table.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
