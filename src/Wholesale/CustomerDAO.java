@@ -11,11 +11,9 @@ import java.util.List;
 
 import java.sql.Connection;
 
-import Wholesale.Login;
 
 public class CustomerDAO {
 
-	private Login login;
 
 	private Connection conn;
 
@@ -92,12 +90,87 @@ public class CustomerDAO {
 			rs.close();
 			stmt.close();
 			return list;
-			
-		
-
 
 	}
+	
+	public boolean delete(int custId) {
+		String sql="DELETE FROM customer WHERE Cust_id ='"+custId+"'";
+
+        try
+        {
+           
+            //STATEMENT
+            Statement s=conn.prepareStatement(sql);
+
+            //EXECUTE
+            s.execute(sql);
+
+            return true;
+
+        }catch(Exception ex)
+        {
+            ex.printStackTrace();
+            return false;
+        }
+    }
 		
+	
+	
+	public boolean update(int custId, String first, String middle, String last, String address, String phone) {
+		String sql = "UPDATE customer SET Cust_id ='" + custId + "' ,f_name= '" + first 
+				+ "',m_name='" + middle + "', l_name='" + last + "', Cust_address= '" + address 
+				+ "', Cust_phone='" + phone +"' WHERE Cust_id='" + custId + "'";
+
+        try {
+
+
+            //STATEMENT
+            Statement s = conn.prepareStatement(sql);
+
+            //EXECUTE
+            s.execute(sql);
+
+            return true;
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            return false;
+        }
+	}
+		
+	public boolean addRow(int custId, String first, String middle, String last, String address, String phone) {
+		
+		boolean added = false;
+		
+		PreparedStatement ps = null;
+		
+	    try {
+			conn.setAutoCommit(false);
+
+			    
+			// Let's write a tuple or two
+			ps = conn.prepareStatement("INSERT INTO CUSTOMER VALUES (?, ?, ?, ?, ?, ?)");
+			ps.setInt(1, custId );
+			ps.setString(2, first);
+			ps.setString(3, middle);
+			ps.setString(4, last);
+			ps.setString(5,  address);
+			ps.setString(6,  phone);
+			if (ps.executeUpdate() > 0) {
+				added = true;
+			}
+			
+			ps.close();
+
+			// Have to do this to write changes to a DB
+			conn.commit();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return added;
+		
+	}
 	
 
 	private Customer convertRowToCustomer(ResultSet rs) throws SQLException {
