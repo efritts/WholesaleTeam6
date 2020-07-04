@@ -5,8 +5,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.PreparedStatement;
+import java.sql.Date;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 
@@ -52,7 +52,7 @@ public class PurchaseOrderDAO {
 
 		try {
 			stmt = conn.createStatement();
-			rs = stmt.executeQuery("select * from PurchaseOrder");
+			rs = stmt.executeQuery("select * from Purchase_Order");
 
 			// set
 			while (rs.next()) {
@@ -80,7 +80,7 @@ public class PurchaseOrderDAO {
 		ResultSet rs = null;
 
 		
-			stmt = conn.prepareStatement("select * from PurchaseOrder where PO_num like ?");
+			stmt = conn.prepareStatement("select * from Purchase_Order where PO_num like ?");
 			
 			stmt.setInt(1, tempId);
 			
@@ -99,7 +99,80 @@ public class PurchaseOrderDAO {
 
 	}
 		
+	public boolean delete(int poNum) {
+		String sql="DELETE FROM purchase_order WHERE po_num ='"+poNum+"'";
+
+        try
+        {
+           
+            //STATEMENT
+            Statement s=conn.prepareStatement(sql);
+
+            //EXECUTE
+            s.execute(sql);
+
+            return true;
+
+        }catch(Exception ex)
+        {
+            ex.printStackTrace();
+            return false;
+        }
+    }
+		
 	
+	
+	public boolean update(int poNum, String string) {
+		String sql = "UPDATE purchase_order SET po_num ='" + poNum + "' ,purchase_date= '" + string 
+				+ "' WHERE po_num='" + poNum + "'";
+
+        try {
+
+
+            //STATEMENT
+            Statement s = conn.prepareStatement(sql);
+
+            //EXECUTE
+            s.execute(sql);
+
+            return true;
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            return false;
+        }
+	}
+		
+	public boolean addRow(int poNum, String string) {
+		boolean added = false;
+		
+		PreparedStatement ps = null;
+		
+	    try {
+			conn.setAutoCommit(false);
+
+			Date date = Date.valueOf(string);
+			    
+			// Let's write a tuple or two
+			ps = conn.prepareStatement("INSERT INTO purchase_order VALUES (?, ?)");
+			ps.setInt(1, poNum );
+			ps.setDate(2, date);
+			
+			if (ps.executeUpdate() > 0) {
+				added = true;
+			}
+			
+			ps.close();
+
+			// Have to do this to write changes to a DB
+			conn.commit();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return added;
+		
+	}
 
 	private PurchaseOrder convertRowToPurchaseOrder(ResultSet rs) throws SQLException {
 		// TODO Auto-generated method stub
