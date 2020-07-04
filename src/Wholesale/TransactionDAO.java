@@ -112,4 +112,38 @@ public class TransactionDAO {
 		return tempTransaction;
 	}
 
+	public boolean delete(int custId, int supId, int poNum) {
+		// TODO Auto-generated method stub
+		
+		String sql="DELETE FROM transactions WHERE Cust_id ='"+custId+"' AND sup_id= '" + supId +
+				"' AND po_num = '" + poNum +"'";
+
+        try
+        {
+           
+            //STATEMENT
+            Statement s=conn.prepareStatement(sql);
+
+            //EXECUTE
+            s.execute(sql);
+
+            return true;
+
+        }catch(Exception ex)
+        {
+            ex.printStackTrace();
+            return false;
+        }
+	}
+
+	public boolean update(int parseInt, int parseInt2, int parseInt3) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	public boolean addRow(int parseInt, int parseInt2, int parseInt3) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
 }
