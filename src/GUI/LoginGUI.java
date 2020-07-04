@@ -82,12 +82,19 @@ public class LoginGUI {
 		
 		txtUrl = new JTextField();
 		txtUrl.setToolTipText("Address of your MySQL instance");
+		
+		//labels
+		JLabel mysqlAddrLabel, userLabel, pwLabel, driverLabel, fileLocaltionLabel;
+		mysqlAddrLabel = new JLabel("DB Address");
+		GridBagConstraints gbc_addr = new GridBagConstraints();
+		gbc_addr.gridx = 2;
+		frame.getContentPane().add(mysqlAddrLabel, gbc_addr);
 
 		txtUrl.setDropMode(DropMode.INSERT);
 		txtUrl.setHorizontalAlignment(SwingConstants.CENTER);
 //		txtUrl.setText("URL");
 		txtUrl.setText("jdbc:mysql://localhost:3306/Wholesaler?autoReconnect=true&useSSL=false&serverTimezone=America/Chicago");
-		
+
 		GridBagConstraints gbc_txtUrl = new GridBagConstraints();
 		gbc_txtUrl.insets = new Insets(0, 0, 5, 0);
 		gbc_txtUrl.fill = GridBagConstraints.HORIZONTAL;
@@ -95,6 +102,12 @@ public class LoginGUI {
 		gbc_txtUrl.gridy = 0;
 		frame.getContentPane().add(txtUrl, gbc_txtUrl);
 		txtUrl.setColumns(10);
+
+		userLabel = new JLabel("DB User");
+		GridBagConstraints gbc_userlabel = new GridBagConstraints();
+		gbc_userlabel.gridx = 2;
+		gbc_userlabel.gridy = 1;
+		frame.getContentPane().add(userLabel,gbc_userlabel);
 		
 		txtUsername = new JTextField();
 		txtUsername.setToolTipText("MySQL Username");
@@ -110,6 +123,8 @@ public class LoginGUI {
 		frame.getContentPane().add(txtUsername, gbc_txtUsername);
 		txtUsername.setColumns(10);
 		
+
+
 		btnNewButton = new JButton("Connect");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -124,10 +139,16 @@ public class LoginGUI {
 
 		GridBagConstraints gbc_btnNewButton = new GridBagConstraints();
 		gbc_btnNewButton.insets = new Insets(0, 0, 5, 5);
-		gbc_btnNewButton.gridx = 2;
-		gbc_btnNewButton.gridy = 2;
+		gbc_btnNewButton.gridx = 3;
+		gbc_btnNewButton.gridy = 5;
 		frame.getContentPane().add(btnNewButton, gbc_btnNewButton);
 		
+		pwLabel = new JLabel("DB PW");
+		GridBagConstraints gbc_pwlabel = new GridBagConstraints();
+		gbc_pwlabel.gridx = 2;
+		gbc_pwlabel.gridy = 2;
+		frame.getContentPane().add(pwLabel,gbc_pwlabel);
+
 		txtPassword = new JTextField();
 		txtPassword.setToolTipText("MySQL Password");
 //		txtPassword.setText("Password");
@@ -142,6 +163,13 @@ public class LoginGUI {
 		frame.getContentPane().add(txtPassword, gbc_txtPassword);
 		txtPassword.setColumns(10);
 		
+
+		driverLabel = new JLabel("DB Driver Package");
+		GridBagConstraints gbc_driverlabel = new GridBagConstraints();
+		gbc_driverlabel.gridx = 2;
+		gbc_driverlabel.gridy = 3;
+		frame.getContentPane().add(driverLabel,gbc_driverlabel);
+
 		txtDriver = new JTextField();
 		txtDriver.setToolTipText("JDBC Driver");
 //		txtDriver.setText("Driver");
@@ -159,10 +187,16 @@ public class LoginGUI {
 		btnNewButton_1 = new JButton("Cancel");
 		GridBagConstraints gbc_btnNewButton_1 = new GridBagConstraints();
 		gbc_btnNewButton_1.insets = new Insets(0, 0, 5, 5);
-		gbc_btnNewButton_1.gridx = 2;
-		gbc_btnNewButton_1.gridy = 4;
+		gbc_btnNewButton_1.gridx = 5;
+		gbc_btnNewButton_1.gridy = 5;
 		frame.getContentPane().add(btnNewButton_1, gbc_btnNewButton_1);
 		
+		fileLocaltionLabel = new JLabel("Driver Package File Location");
+		GridBagConstraints gbc_fileloclabel = new GridBagConstraints();
+		gbc_fileloclabel.gridx = 2;
+		gbc_fileloclabel.gridy = 4;
+		frame.getContentPane().add(fileLocaltionLabel,gbc_fileloclabel);
+
 		txtDriverLocation = new JTextField();
 //		txtDriverLocation.setText("Driver Location");
 		txtDriverLocation.setText("/Users/efritts/Eclipse-Workspaces/WholesaleTeam6/lib/mysql-connector-java-5.1.45-bin.jar");
