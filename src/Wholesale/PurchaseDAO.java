@@ -88,12 +88,83 @@ public class PurchaseDAO {
 			rs.close();
 			stmt.close();
 			return list;
-			
 		
-
-
 	}
 		
+	public boolean delete(int poNum, int prodId) {
+		String sql="DELETE FROM purchase WHERE PO_num ='"+poNum+ "' AND Prod_id='" + prodId +"'";
+
+        try
+        {
+           
+            //STATEMENT
+            Statement s=conn.prepareStatement(sql);
+
+            //EXECUTE
+            s.execute(sql);
+
+            return true;
+
+        }catch(Exception ex)
+        {
+            ex.printStackTrace();
+            return false;
+        }
+    }
+		
+	
+	
+	public boolean update(int poNum, int prodId, int quantity) {
+		String sql = "UPDATE purchase SET po_num ='" + poNum + "' ,prod_id= '" + prodId
+				+ "',p_quantity='" + quantity +"' WHERE po_num='" + poNum + "' AND prod_id = '" +prodId+"'";
+
+        try {
+
+
+            //STATEMENT
+            Statement s = conn.prepareStatement(sql);
+
+            //EXECUTE
+            s.execute(sql);
+
+            return true;
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            return false;
+        }
+	}
+		
+	public boolean addRow(int poNum, int prodId, int quantity) {
+		
+		boolean added = false;
+		
+		PreparedStatement ps = null;
+		
+	    try {
+			conn.setAutoCommit(false);
+
+			    
+			// Let's write a tuple or two
+			ps = conn.prepareStatement("INSERT INTO purchase VALUES (?, ?, ?)");
+			ps.setInt(1, poNum );
+			ps.setInt(2, prodId);
+			ps.setInt(3, quantity);
+			if (ps.executeUpdate() > 0) {
+				added = true;
+			}
+			
+			ps.close();
+
+			// Have to do this to write changes to a DB
+			conn.commit();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return added;
+		
+	}
 	
 
 	private Purchase convertRowToPurchase(ResultSet rs) throws SQLException {
