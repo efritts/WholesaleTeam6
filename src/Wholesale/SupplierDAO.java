@@ -11,11 +11,7 @@ import java.util.List;
 
 import java.sql.Connection;
 
-import Wholesale.Login;
-
 public class SupplierDAO {
-
-	private Login login;
 
 	private Connection conn;
 
@@ -112,5 +108,79 @@ public class SupplierDAO {
 
 		return tempSupplier;
 	}
+
+	public boolean addRow(String supId, String name, String address, String phone) {
+		
+		boolean added = false;
+		
+		PreparedStatement ps = null;
+		
+	    try {
+			conn.setAutoCommit(false);
+
+			    
+			// Let's write a tuple or two
+			ps = conn.prepareStatement("INSERT INTO SUPPLIER VALUES (?, ?, ?, ?)");
+			ps.setString(1, supId );
+			ps.setString(2, name);
+			ps.setString(3, address);
+			ps.setString(4, phone);
+		
+			if (ps.executeUpdate() > 0) {
+				added = true;
+			}
+			
+			ps.close();
+
+			// Have to do this to write changes to a DB
+			conn.commit();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return added;
+	}
+
+	public boolean update(String suppId, String name, String address, String phone) {
+		String sql = "UPDATE supplier SET Sup_id ='" + suppId + "' ,Sup_name= '" + name 
+				+ "',sup_address='" + address + phone +"' WHERE Sup_id='" + suppId + "'";
+
+        try {
+
+
+            //STATEMENT
+            Statement s = conn.prepareStatement(sql);
+
+            //EXECUTE
+            s.execute(sql);
+
+            return true;
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            return false;
+        }
+	}
+
+	public boolean delete(int suppId) {
+		String sql="DELETE FROM supplier WHERE Sup_id ='"+suppId+"'";
+
+        try
+        {
+           
+            //STATEMENT
+            Statement s=conn.prepareStatement(sql);
+
+            //EXECUTE
+            s.execute(sql);
+
+            return true;
+
+        }catch(Exception ex)
+        {
+            ex.printStackTrace();
+            return false;
+        }
+    }
 
 }

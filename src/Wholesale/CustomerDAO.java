@@ -187,5 +187,9 @@ public class CustomerDAO {
 
 		return tempEmployee;
 	}
+	
+	public void closeConn() throws SQLException {
+		conn.close();
+	}
 
 }

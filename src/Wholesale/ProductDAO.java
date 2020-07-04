@@ -94,6 +94,82 @@ public class ProductDAO {
 
 	}
 		
+	public boolean delete(int prodId) {
+		String sql="DELETE FROM product WHERE Prod_id ='"+ prodId +"'";
+
+        try
+        {
+           
+            //STATEMENT
+            Statement s=conn.prepareStatement(sql);
+
+            //EXECUTE
+            s.execute(sql);
+
+            return true;
+
+        }catch(Exception ex)
+        {
+            ex.printStackTrace();
+            return false;
+        }
+    }
+		
+	
+	
+	public boolean update(int prodId, String name, int wholePrice, int retailPrice) {
+		String sql = "UPDATE product SET prod_id ='" + prodId + "' ,prod_name= '" + name 
+				+ "',whole_price='" + wholePrice + "', retail_price='" + retailPrice 
+				+ "' WHERE Prod_id='" + prodId + "'";
+
+        try {
+
+
+            //STATEMENT
+            Statement s = conn.prepareStatement(sql);
+
+            //EXECUTE
+            s.execute(sql);
+
+            return true;
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            return false;
+        }
+	}
+		
+	public boolean addRow(int prodId, String name, int wholePrice, int retailPrice) {
+		
+		boolean added = false;
+		
+		PreparedStatement ps = null;
+		
+	    try {
+			conn.setAutoCommit(false);
+
+			    
+			// Let's write a tuple or two
+			ps = conn.prepareStatement("INSERT INTO PRODUCT VALUES (?, ?, ?, ?)");
+			ps.setInt(1, prodId );
+			ps.setString(2, name);
+			ps.setInt(3, wholePrice);
+			ps.setInt(4, retailPrice);
+			if (ps.executeUpdate() > 0) {
+				added = true;
+			}
+			
+			ps.close();
+
+			// Have to do this to write changes to a DB
+			conn.commit();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return added;
+		
+	}
 	
 
 	private Product convertRowToProduct(ResultSet rs) throws SQLException {

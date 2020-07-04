@@ -28,6 +28,8 @@ import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.WindowAdapter;
+import java.sql.SQLException;
 
 public class CustomerGUI extends JFrame {
 
@@ -57,6 +59,15 @@ public class CustomerGUI extends JFrame {
 					CustomerGUI frame = new CustomerGUI();
 					frame.pack();
 					frame.setVisible(true);
+					frame.addWindowListener(new WindowAdapter() {
+						  private CustomerDAO customerDAO;
+
+						public void windowClosing() throws SQLException {
+						    //do something
+							 customerDAO = new CustomerDAO();
+							 customerDAO.closeConn();
+						  }
+						});
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -126,6 +137,7 @@ public class CustomerGUI extends JFrame {
 		contentPane.add(scrollPane, BorderLayout.CENTER);
 
 		table = new JTable();
+		table.setColumnSelectionAllowed(true);
 		table.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -342,6 +354,8 @@ public class CustomerGUI extends JFrame {
 			}
 		});
 		panel_2.add(btnDelete);
+		
+	
 
 	}
 }
