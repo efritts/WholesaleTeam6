@@ -2,6 +2,7 @@ package GUI;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
+import java.awt.Font;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -13,6 +14,7 @@ import Wholesale.CustomerDAO;
 
 import javax.swing.JTable;
 import javax.swing.JScrollPane;
+import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -138,7 +140,7 @@ public class CustomerGUI extends JFrame {
 		});
 		panel.add(btnCustomerSearch);
 
-		JScrollPane scrollPane = new JScrollPane();
+		JScrollPane scrollPane = new JScrollPane(table);
 		contentPane.add(scrollPane, BorderLayout.CENTER);
 
 		table = new JTable() {
@@ -158,7 +160,6 @@ public class CustomerGUI extends JFrame {
 		// Show vertical grid lines
 		table.setShowVerticalLines(true);
 		table.setGridColor(Color.black);
-
 
 		table.setColumnSelectionAllowed(true);
 		table.addMouseListener(new MouseAdapter() {
@@ -378,5 +379,24 @@ public class CustomerGUI extends JFrame {
 		});
 		panel_2.add(btnDelete);
 
+		table.getTableHeader().setDefaultRenderer(new SimpleHeaderRenderer());
+
 	}
+
+	public class SimpleHeaderRenderer extends JLabel implements TableCellRenderer {
+
+		public SimpleHeaderRenderer() {
+			setFont(new Font("Consolas", Font.BOLD, 12));
+			setForeground(Color.BLUE);
+			setBorder(BorderFactory.createEtchedBorder());
+		}
+
+		@Override
+		public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus,
+				int row, int column) {
+			setText(value.toString());
+			return this;
+		}
+	}
+
 }

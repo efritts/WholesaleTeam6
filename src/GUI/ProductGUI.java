@@ -2,6 +2,7 @@ package GUI;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
+import java.awt.Font;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -13,6 +14,7 @@ import Wholesale.Product;
 import Wholesale.ProductDAO;
 import javax.swing.JTable;
 import javax.swing.JScrollPane;
+import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -26,6 +28,8 @@ import java.awt.Component;
 
 import javax.swing.border.LineBorder;
 import javax.swing.table.TableCellRenderer;
+
+import GUI.CustomerGUI.SimpleHeaderRenderer;
 
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
@@ -320,6 +324,24 @@ public class ProductGUI extends JFrame {
 		gbc_retailPriceTxt.gridy = 7;
 		panel_1.add(retailPriceTxt, gbc_retailPriceTxt);
 		retailPriceTxt.setColumns(10);
-		
+		table.getTableHeader().setDefaultRenderer(new SimpleHeaderRenderer());
+
 	}
+
+	public class SimpleHeaderRenderer extends JLabel implements TableCellRenderer {
+
+		public SimpleHeaderRenderer() {
+			setFont(new Font("Consolas", Font.BOLD, 12));
+			setForeground(Color.BLUE);
+			setBorder(BorderFactory.createEtchedBorder());
+		}
+
+		@Override
+		public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus,
+				int row, int column) {
+			setText(value.toString());
+			return this;
+		}
+	}
+
 }
