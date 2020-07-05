@@ -2,6 +2,7 @@ package GUI;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
+import java.awt.Font;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -14,6 +15,7 @@ import Wholesale.SupplierDAO;
 
 import javax.swing.JTable;
 import javax.swing.JScrollPane;
+import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -23,7 +25,13 @@ import java.awt.event.ActionListener;
 import java.util.List;
 import java.awt.event.ActionEvent;
 import java.awt.Color;
+import java.awt.Component;
+
 import javax.swing.border.LineBorder;
+import javax.swing.table.TableCellRenderer;
+
+import GUI.CustomerGUI.SimpleHeaderRenderer;
+
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
@@ -126,7 +134,24 @@ public class SupplierGUI extends JFrame {
 		JScrollPane scrollPane = new JScrollPane();
 		contentPane.add(scrollPane, BorderLayout.CENTER);
 		
-		table = new JTable();
+		table = new JTable() {
+			@Override
+			public Component prepareRenderer(TableCellRenderer renderer, int row, int col) {
+				Component comp = super.prepareRenderer(renderer, row, col);
+				((JLabel) comp).setHorizontalAlignment(JLabel.LEFT);
+				return comp;
+			}
+
+		};
+		table.setBackground(Color.WHITE);
+
+		table.setShowGrid(true);
+		// Removing the grid line from the table
+		// table.setShowGrid(false);
+		// Show vertical grid lines
+		table.setShowVerticalLines(true);
+		table.setGridColor(Color.black);
+
 		table.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -300,6 +325,25 @@ public class SupplierGUI extends JFrame {
 		gbc_phoneTxt.gridy = 7;
 		panel_2.add(phoneTxt, gbc_phoneTxt);
 		phoneTxt.setColumns(10);
-		
+		table.getTableHeader().setDefaultRenderer(new SimpleHeaderRenderer());
+
 	}
+
+	public class SimpleHeaderRenderer extends JLabel implements TableCellRenderer {
+
+		public SimpleHeaderRenderer() {
+			setFont(new Font("Consolas", Font.BOLD, 12));
+			setForeground(Color.BLUE);
+			setBorder(BorderFactory.createEtchedBorder());
+		}
+
+		@Override
+		public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus,
+				int row, int column) {
+			setText(value.toString());
+			return this;
+		}
+	}
+
 }
+
