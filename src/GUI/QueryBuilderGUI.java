@@ -49,4 +49,35 @@ public class QueryBuilderGUI extends JFrame {
 	}
 
 
+    /**
+     * Create Frame
+     */
+     public QueryBuilderGUI() {
+
+         try {
+            query = new Query();
+         }
+         catch (Exception e1){
+             e1.printStackTrace(); 
+         }
+
+        setBounds(100, 100, 450, 375);
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(contentPane);
+		contentPane.setLayout(new BorderLayout(0, 0));
+		
+		JPanel panel = new JPanel();
+		contentPane.add(panel, BorderLayout.NORTH);
+		
+		JLabel lblNewLabel = new JLabel("Enter Search Term");
+		lblNewLabel.setHorizontalAlignment(SwingConstants.LEFT);
+		panel.add(lblNewLabel);
+		
+		textField = new JTextField();
+		panel.add(textField);
+
+     }
+
+
 }
