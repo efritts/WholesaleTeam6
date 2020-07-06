@@ -35,7 +35,7 @@ public class Query {
 			Class.forName(driver);
 
 			conn = DriverManager.getConnection(url, user, pass);
-            String qry = "select ?;"
+            String qry = "select ?;";
             stm = conn.prepareStatement(qry);
             stm.setString(1, userQuery);
 
