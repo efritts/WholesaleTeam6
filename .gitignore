@@ -1,7 +1,6 @@
 /bin/
-
-	*.classpath
-	*.project
-	*.settings/
-	*lib/
-	*miglayout15-swing.jar
+.classpath
+.project
+.settings/
+lib/
+miglayout15-swing.jar

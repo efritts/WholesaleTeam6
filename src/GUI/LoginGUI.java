@@ -4,14 +4,7 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JTextField;
-import java.awt.BorderLayout;
-import javax.swing.JPanel;
 import javax.swing.SwingConstants;
-import javax.swing.JEditorPane;
-import java.awt.TextField;
-import java.awt.Window;
-import java.awt.GridLayout;
-import javax.swing.JLabel;
 import javax.swing.DropMode;
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
@@ -20,12 +13,7 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.AbstractAction;
-import javax.swing.Action;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-
 import Wholesale.Login;
-import java.awt.Window.Type;
 import java.awt.Dialog.ModalExclusionType; 
 
 public class LoginGUI {
@@ -38,10 +26,6 @@ public class LoginGUI {
 	private JTextField txtDriverLocation;
 	private JButton btnNewButton;
 	private JButton btnNewButton_1;
-	private final Action action = new SwingAction();
-	
-	private Login login;
-
 	/**
 	 * Launch the application.
 	 */
