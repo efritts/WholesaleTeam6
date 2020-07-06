@@ -7,10 +7,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import TableModel.SupplierTableModel;
-import Wholesale.SupplierDAO;
-import Wholesale.Supplier;
-import Wholesale.SupplierDAO;
+import Wholesale.Query;
 
 import javax.swing.JTable;
 import javax.swing.JScrollPane;
@@ -31,6 +28,21 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 public class QueryBuilderGUI extends JFrame {
+    
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private JPanel contentPane;
+	private JTextField textField;
+	private JTable table;
+	
+	private Query query;
+	private JTextField suppIdTxt;
+	private JTextField nameTxt;
+	private JTextField addressTxt;
+	private JTextField phoneTxt;
+    
     /**
 	 * Launch the application.
 	 */
@@ -55,7 +67,7 @@ public class QueryBuilderGUI extends JFrame {
      public QueryBuilderGUI() {
 
          try {
-            query = new Query();
+            query = new Query("text");
          }
          catch (Exception e1){
              e1.printStackTrace(); 
