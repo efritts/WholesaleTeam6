@@ -1,6 +1,40 @@
-/bin/
-.classpath
+# Compiled class file
+*.class
+
+# Log file
+*.log
+
+### Eclipse ###
+
+### Eclipse Patch ###
+# Eclipse Core		
 .project
-.settings/
-lib/
-miglayout15-swing.jar
+
+# JDT-specific (Eclipse Java Development Tools)		
+.classpath
+
+### Gradle ###
+.grade
+/build/
+/gradle/
+settings.gradle
+.gradle
+.gitattributes
+
+
+# Mac DS file
+.DS_Store
+
+miglayout15*
+
+/lib/
+/bin/
+classes/
+/classes/
+=======
+/.idea/
+
+/.settings/
+=======
+Development
+origin/Development

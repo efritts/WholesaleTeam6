@@ -66,15 +66,7 @@ public class CustomerGUI extends JFrame {
 					CustomerGUI frame = new CustomerGUI();
 					frame.pack();
 					frame.setVisible(true);
-					frame.addWindowListener(new WindowAdapter() {
-						private CustomerDAO customerDAO;
 
-						public void windowClosing() throws SQLException {
-							// do something
-							customerDAO = new CustomerDAO();
-							customerDAO.closeConn();
-						}
-					});
 				} catch (Exception e) {
 					e.printStackTrace();
 				}

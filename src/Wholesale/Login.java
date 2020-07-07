@@ -18,18 +18,18 @@ public class Login {
 	
 	public Login(String url, String user, String pass, String driver, String driverLocation) {
 		
-		this.url = url;
-		this.user = user;
-		this.pass = pass;
-		this.driver = driver;
-		this.driverLocation = driverLocation;
+		Login.url = url;
+		Login.user = user;
+		Login.pass = pass;
+		Login.driver = driver;
+		Login.driverLocation = driverLocation;
 		
 		getConnection();
 	}
 		
 	public void getConnection() {	
 		try {
-				Class.forName(this.driver);
+				Class.forName(Login.driver);
 				
 				Connection conn = DriverManager.getConnection(url, user, pass);
 				
