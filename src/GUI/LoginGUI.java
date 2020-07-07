@@ -70,7 +70,7 @@ public class LoginGUI {
 		txtUrl.setToolTipText("Address of your MySQL instance");
 		
 		//labels
-		JLabel mysqlAddrLabel, userLabel, pwLabel, driverLabel, fileLocaltionLabel;
+		JLabel mysqlAddrLabel, userLabel, pwLabel, driverLabel;
 		mysqlAddrLabel = new JLabel("DB Address");
 		GridBagConstraints gbc_addr = new GridBagConstraints();
 		gbc_addr.gridx = 2;
@@ -176,16 +176,11 @@ public class LoginGUI {
 		gbc_btnNewButton_1.gridx = 5;
 		gbc_btnNewButton_1.gridy = 5;
 		frame.getContentPane().add(btnNewButton_1, gbc_btnNewButton_1);
-		
-		fileLocaltionLabel = new JLabel("Driver Package File Location");
-		GridBagConstraints gbc_fileloclabel = new GridBagConstraints();
-		gbc_fileloclabel.gridx = 2;
-		gbc_fileloclabel.gridy = 4;
-		frame.getContentPane().add(fileLocaltionLabel,gbc_fileloclabel);
 
 		txtDriverLocation = new JTextField();
 		txtDriverLocation.setEditable(false);
 		txtDriverLocation.setEnabled(false);
+		txtDriverLocation.setVisible(false);
 //		txtDriverLocation.setText("Driver Location");
 		txtDriverLocation.setText("/Users/efritts/Eclipse-Workspaces/WholesaleTeam6/lib/mysql-connector-java-5.1.45-bin.jar");
 
