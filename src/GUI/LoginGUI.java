@@ -28,10 +28,6 @@ public class LoginGUI {
 	private JTextField txtDriverLocation;
 	private JButton btnNewButton;
 	private JButton btnNewButton_1;
-	private JLabel lblNewLabel;
-	private JLabel lblNewLabel_1;
-	private JLabel lblNewLabel_2;
-	private JLabel lblNewLabel_3;
 	/**
 	 * Launch the application.
 	 */
@@ -79,13 +75,6 @@ public class LoginGUI {
 		GridBagConstraints gbc_addr = new GridBagConstraints();
 		gbc_addr.gridx = 2;
 		frame.getContentPane().add(mysqlAddrLabel, gbc_addr);
-		
-		lblNewLabel = new JLabel("DB Address");
-		GridBagConstraints gbc_lblNewLabel = new GridBagConstraints();
-		gbc_lblNewLabel.insets = new Insets(0, 0, 5, 5);
-		gbc_lblNewLabel.gridx = 3;
-		gbc_lblNewLabel.gridy = 0;
-		frame.getContentPane().add(lblNewLabel, gbc_lblNewLabel);
 
 		txtUrl.setDropMode(DropMode.INSERT);
 		txtUrl.setHorizontalAlignment(SwingConstants.CENTER);
@@ -105,13 +94,6 @@ public class LoginGUI {
 		gbc_userlabel.gridx = 2;
 		gbc_userlabel.gridy = 1;
 		frame.getContentPane().add(userLabel,gbc_userlabel);
-		
-		lblNewLabel_1 = new JLabel("DB Username");
-		GridBagConstraints gbc_lblNewLabel_1 = new GridBagConstraints();
-		gbc_lblNewLabel_1.insets = new Insets(0, 0, 5, 5);
-		gbc_lblNewLabel_1.gridx = 3;
-		gbc_lblNewLabel_1.gridy = 1;
-		frame.getContentPane().add(lblNewLabel_1, gbc_lblNewLabel_1);
 		
 		txtUsername = new JTextField();
 		txtUsername.setToolTipText("MySQL Username");
@@ -139,20 +121,6 @@ public class LoginGUI {
 				}
 			}
 		});
-		
-		lblNewLabel_2 = new JLabel("DB Password");
-		GridBagConstraints gbc_lblNewLabel_2 = new GridBagConstraints();
-		gbc_lblNewLabel_2.insets = new Insets(0, 0, 5, 5);
-		gbc_lblNewLabel_2.gridx = 3;
-		gbc_lblNewLabel_2.gridy = 2;
-		frame.getContentPane().add(lblNewLabel_2, gbc_lblNewLabel_2);
-		
-		lblNewLabel_3 = new JLabel("Driver");
-		GridBagConstraints gbc_lblNewLabel_3 = new GridBagConstraints();
-		gbc_lblNewLabel_3.insets = new Insets(0, 0, 5, 5);
-		gbc_lblNewLabel_3.gridx = 3;
-		gbc_lblNewLabel_3.gridy = 3;
-		frame.getContentPane().add(lblNewLabel_3, gbc_lblNewLabel_3);
 		
 
 		GridBagConstraints gbc_btnNewButton = new GridBagConstraints();
