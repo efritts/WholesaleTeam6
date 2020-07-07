@@ -69,6 +69,7 @@ public class DBGui {
 		});
 		btnQuery.setBounds(6, 85, 118, 53);
 		frame.getContentPane().add(btnQuery);
+		btnQuery.setVisible(false);
 		
 		JButton btnTransactions = new JButton("Transactions");
 		btnTransactions.addActionListener(new ActionListener() {
