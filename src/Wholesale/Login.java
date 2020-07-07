@@ -13,17 +13,14 @@ public class Login {
 	private static String user;
 	private static String pass;
 	private static String driver;
-	private static String driverLocation;
 	private boolean connStatus;
 	
-	public Login(String url, String user, String pass, String driver, String driverLocation) {
+	public Login(String url, String user, String pass, String driver) {
 		
 		Login.url = url;
 		Login.user = user;
 		Login.pass = pass;
 		Login.driver = driver;
-		Login.driverLocation = driverLocation;
-		
 		getConnection();
 	}
 		

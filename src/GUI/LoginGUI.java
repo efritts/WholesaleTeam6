@@ -98,7 +98,7 @@ public class LoginGUI {
 		btnNewButton = new JButton("Connect");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Login login = new Login(txtUrl.getText(), txtUsername.getText(), txtPassword.getText(), txtDriver.getText(), txtDriverLocation.getText());
+				Login login = new Login(txtUrl.getText(), txtUsername.getText(), txtPassword.getText(), txtDriver.getText());
 				if(login.getStatus() == true) {
 					frame.setVisible(false);
 
