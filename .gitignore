@@ -31,10 +31,4 @@ miglayout15*
 /bin/
 classes/
 /classes/
-=======
-/.idea/
-
-/.settings/
-=======
-Development
-origin/Development
+.settings/

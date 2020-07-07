@@ -62,6 +62,11 @@ public class DBGui {
 		
 		JButton btnQuery = new JButton("Query Builder");
 		btnQuery.setBackground(Color.GREEN);
+		btnQuery.addActionListener( new ActionListener() {
+			public void actionPerformed(ActionEvent e){
+				QueryBuilderGUI.main(null);
+			}
+		});
 		btnQuery.setBounds(6, 85, 118, 53);
 		frame.getContentPane().add(btnQuery);
 		
