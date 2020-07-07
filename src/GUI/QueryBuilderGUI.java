@@ -7,25 +7,22 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import Wholesale.Query;
+import Wholesale.QueryDAO;
 
 import javax.swing.JTable;
-import javax.swing.JScrollPane;
 import javax.swing.JButton;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.util.List;
 import java.awt.event.ActionEvent;
-import java.awt.Color;
-import javax.swing.border.LineBorder;
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+import javax.swing.JTextArea;
+import javax.swing.BoxLayout;
 
 public class QueryBuilderGUI extends JFrame {
     
@@ -34,10 +31,9 @@ public class QueryBuilderGUI extends JFrame {
 	 */
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
-	private JTextField textField;
 	private JTable table;
 	
-	private Query query;
+	private QueryDAO query;
 	private JTextField suppIdTxt;
 	private JTextField nameTxt;
 	private JTextField addressTxt;
@@ -67,7 +63,7 @@ public class QueryBuilderGUI extends JFrame {
      public QueryBuilderGUI() {
 
          try {
-            query = new Query("text");
+            query = new QueryDAO("text");
          }
          catch (Exception e1){
              e1.printStackTrace(); 
@@ -81,15 +77,92 @@ public class QueryBuilderGUI extends JFrame {
 		
 		JPanel panel = new JPanel();
 		contentPane.add(panel, BorderLayout.NORTH);
+		GridBagLayout gbl_panel = new GridBagLayout();
+		gbl_panel.columnWidths = new int[]{155, 113, 11, 0};
+		gbl_panel.rowHeights = new int[]{26, 0};
+		gbl_panel.columnWeights = new double[]{0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gbl_panel.rowWeights = new double[]{0.0, Double.MIN_VALUE};
+		panel.setLayout(gbl_panel);
 		
-		JLabel lblNewLabel = new JLabel("Enter Search Term");
+		JLabel lblNewLabel = new JLabel("Enter Search Terms Below:");
 		lblNewLabel.setHorizontalAlignment(SwingConstants.LEFT);
-		panel.add(lblNewLabel);
+		GridBagConstraints gbc_lblNewLabel = new GridBagConstraints();
+		gbc_lblNewLabel.anchor = GridBagConstraints.WEST;
+		gbc_lblNewLabel.insets = new Insets(0, 0, 0, 5);
+		gbc_lblNewLabel.gridx = 0;
+		gbc_lblNewLabel.gridy = 0;
+		panel.add(lblNewLabel, gbc_lblNewLabel);
 		
-		textField = new JTextField();
-		panel.add(textField);
+		JPanel panel_1 = new JPanel();
+		contentPane.add(panel_1, BorderLayout.SOUTH);
+		GridBagLayout gbl_panel_1 = new GridBagLayout();
+		gbl_panel_1.columnWidths = new int[]{0, 0, 0, 0, 0, 0, 0, 0};
+		gbl_panel_1.rowHeights = new int[]{0, 0};
+		gbl_panel_1.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gbl_panel_1.rowWeights = new double[]{0.0, Double.MIN_VALUE};
+		panel_1.setLayout(gbl_panel_1);
+		
 
+		
+		
+		
+		JPanel panel_2 = new JPanel();
+		contentPane.add(panel_2, BorderLayout.CENTER);
+		panel_2.setLayout(new BoxLayout(panel_2, BoxLayout.Y_AXIS));
+		
+		JTextArea textArea = new JTextArea();
+		textArea.setLineWrap(true);
+		panel_2.add(textArea);
+		
+		JTextArea textArea_1 = new JTextArea();
+		textArea_1.setLineWrap(true);
+		panel_2.add(textArea_1);
+		
+		JButton btnNewButton = new JButton("Clear");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				textArea.setText("");
+			}
+		});
+		
+		GridBagConstraints gbc_btnNewButton = new GridBagConstraints();
+		gbc_btnNewButton.insets = new Insets(0, 0, 0, 5);
+		gbc_btnNewButton.gridx = 3;
+		gbc_btnNewButton.gridy = 0;
+		panel_1.add(btnNewButton, gbc_btnNewButton);
+		
+		JButton btnNewButton_1 = new JButton("Query");
+		btnNewButton_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				List sql = new ArrayList<String>();
+				sql = query.query(textArea.getText());
+								
+				String[] list = new String[sql.size()];
+				String tempList = "";
+
+				for(int i = 0; i < sql.size(); i++) {
+					list[i] = sql.get(i).toString();
+					String.format(getName(), list);
+				}
+				
+				for(int i = 0; i < list.length; i++) {
+					tempList = tempList + " " + list[i];
+				}
+				
+				textArea_1.setText(tempList);
+				
+			}
+		});
+		
+		GridBagConstraints gbc_btnNewButton_1 = new GridBagConstraints();
+		gbc_btnNewButton_1.gridx = 6;
+		gbc_btnNewButton_1.gridy = 0;
+		panel_1.add(btnNewButton_1, gbc_btnNewButton_1);
+		
      }
+     
+
+     
 
 
 }
